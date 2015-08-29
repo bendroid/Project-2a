@@ -7,21 +7,6 @@ var bio = {
 	"bioPic": "./images/fry.jpg"
 };
 
-var contacts = {
-	"mobile": "(555)-555-5555",
-	"email": "email@myemail.com",
-	"github": "bendroid",
-	"twitter": "@jaemood",
-	"location": "Rochester, NY"
-};
-
-var work = {
-	"employer": ["Company 1", "Company 2"],
-	"position": ["My Job 1", "My Job 2"],
-	"years": 0.3,
-	"start": "2010"
-};
-
 var education = {
   "schools": [
 	{
@@ -51,6 +36,47 @@ var education = {
   ]
 }
 
+var contacts = {
+	"mobile": "(555)-555-5555",
+	"email": "email@myemail.com",
+	"github": "bendroid",
+	"twitter": "@jaemood",
+	"location": "Rochester, NY"
+};
+
+var work = {
+	"jobs": [
+		{
+			"employer": "Company 2",
+			"title": "Project Manager",
+			"dates": "2004 - Present",
+			"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum ex vitae ligula tristique, in egestas diam aliquam. In aliquet nulla et ante porta euismod. In vel nisl vulputate, venenatis elit non, vulputate enim. Vivamus eu sem ullamcorper, vulputate urna vitae, commodo risus. Etiam sagittis eget purus a mattis. Etiam pharetra vel mi ut gravida. Fusce ex ligula, fringilla quis luctus in, fringilla venenatis eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed at metus ut velit finibus luctus. Quisque eget quam ut ante hendrerit faucibus. Vestibulum quis metus finibus, mattis nunc eu, sollicitudin dolor. Donec id venenatis magna, vitae laoreet dui. Phasellus laoreet, arcu laoreet laoreet vestibulum, dolor metus sagittis libero, ac auctor dui purus ut velit. Donec cursus et elit vel pellentesque. Morbi ornare tristique dolor.",
+		},
+		{
+			"employer": "Company 1",
+			"title": "Project Manager Again",
+			"dates": "2001 - 2004",
+			"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum ex vitae ligula tristique, in egestas diam aliquam. In aliquet nulla et ante porta euismod. In vel nisl vulputate, venenatis elit non, vulputate enim. Vivamus eu sem ullamcorper, vulputate urna vitae, commodo risus. Etiam sagittis eget purus a mattis. Etiam pharetra vel mi ut gravida. Fusce ex ligula, fringilla quis luctus in, fringilla venenatis eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed at metus ut velit finibus luctus. Quisque eget quam ut ante hendrerit faucibus. Vestibulum quis metus finibus, mattis nunc eu, sollicitudin dolor. Donec id venenatis magna, vitae laoreet dui. Phasellus laoreet, arcu laoreet laoreet vestibulum, dolor metus sagittis libero, ac auctor dui purus ut velit. Donec cursus et elit vel pellentesque. Morbi ornare tristique dolor.",
+		},
+	]
+};
+
+var projects = {
+	"projects": [
+		{
+			"title": "Sample Project 1",
+			"dates": "2004 - Present",
+			"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum ex vitae ligula tristique, in egestas diam aliquam. In aliquet nulla et ante porta euismod. In vel nisl vulputate, venenatis elit non, vulputate enim. Vivamus eu sem ullamcorper, vulputate urna vitae, commodo risus. Etiam sagittis eget purus a mattis. Etiam pharetra vel mi ut gravida. Fusce ex ligula, fringilla quis luctus in, fringilla venenatis eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed at metus ut velit finibus luctus. Quisque eget quam ut ante hendrerit faucibus. Vestibulum quis metus finibus, mattis nunc eu, sollicitudin dolor. Donec id venenatis magna, vitae laoreet dui. Phasellus laoreet, arcu laoreet laoreet vestibulum, dolor metus sagittis libero, ac auctor dui purus ut velit. Donec cursus et elit vel pellentesque. Morbi ornare tristique dolor.",
+			"images": [
+				"./images/fry.jpg",
+				"./images/fry.jpg"
+				]
+		}
+	]
+}
+
+
+
 var formattedPic = HTMLbioPic.replace("%data%", bio.bioPic);
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
 var formattedEmail = HTMLemail.replace("%data%", contacts.email);
@@ -61,10 +87,14 @@ var formattedMobile = HTMLmobile.replace("%data%", contacts.mobile);
 var formattedLocation = HTMLlocation.replace("%data%", contacts.location);
 var formattedWelcome = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 
+
+
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
 $("#header").append(formattedWelcome);
 $("#header").append(formattedPic);
+
+
 if(bio.skills.length > 0) {
   $("#header").append(HTMLskillsStart);
 
@@ -78,6 +108,36 @@ if(bio.skills.length > 0) {
     $("#skills").append(formattedSkill);
 }
 
+function displayWork() {
+	
+for (job in work.jobs) {
+	$("#workExperience").append(HTMLworkStart);
+	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+	var formattedEmployerTitle = formattedEmployer + formattedTitle;
+	$(".work-entry:last").append(formattedEmployerTitle);
+	
+	var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+	$(".work-entry:last").append(formattedDates);
+	
+	var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+	$(".work-entry:last").append(formattedDescription);
+}
+}
+
+displayWork();
+
+$(document).click(function(loc) {
+	var x = loc.pageX;
+	var y = loc.pageY;
+	
+	logClicks(x,y);
+});
+
+
+
+
+/*
 if(work.employer.length > 0) {
   $("#workExperience").append(HTMLworkStart);
 
@@ -96,6 +156,7 @@ if(work.position.length > 0) {
     $(".work-entry").append(formattedPosition);
 };
 
+*/
 $("#topContacts").append(formattedEmail);
 $("#topContacts").append(formattedTwitter);
 $("#topContacts").append(formattedGithub);
@@ -106,6 +167,7 @@ $("#footerContacts").append(formattedTwitter);
 $("#footerContacts").append(formattedGithub);
 $("#footerContacts").append(formattedMobile);
 $("#footerContacts").append(formattedLocation);
+
 
 if(document.getElementsByClassName('flex-item').length === 0) {
           // document.style.backgroundColor = "black";
