@@ -38,7 +38,7 @@ var education = {
 
 var contacts = {
 	"mobile": "(555)-555-5555",
-	"email": "email@myemail.com",
+	"email": "noemail@noemail.com",
 	"github": "bendroid",
 	"twitter": "@jaemood",
 	"location": "Rochester, NY"
@@ -61,19 +61,24 @@ var work = {
 	]
 };
 
+
 var projects = {
 	"projects": [
 		{
-			"title": "Sample Project 1",
-			"dates": "2004 - Present",
-			"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum ex vitae ligula tristique, in egestas diam aliquam. In aliquet nulla et ante porta euismod. In vel nisl vulputate, venenatis elit non, vulputate enim. Vivamus eu sem ullamcorper, vulputate urna vitae, commodo risus. Etiam sagittis eget purus a mattis. Etiam pharetra vel mi ut gravida. Fusce ex ligula, fringilla quis luctus in, fringilla venenatis eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed at metus ut velit finibus luctus. Quisque eget quam ut ante hendrerit faucibus. Vestibulum quis metus finibus, mattis nunc eu, sollicitudin dolor. Donec id venenatis magna, vitae laoreet dui. Phasellus laoreet, arcu laoreet laoreet vestibulum, dolor metus sagittis libero, ac auctor dui purus ut velit. Donec cursus et elit vel pellentesque. Morbi ornare tristique dolor.",
-			"images": [
-				"./images/fry.jpg",
-				"./images/fry.jpg"
-				]
+		"title": "Sample Project 1",
+		"dates": "2004 - Present",
+		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum ex vitae ligula tristique, in egestas diam aliquam. In aliquet nulla et ante porta euismod. In vel nisl vulputate, venenatis elit non, vulputate enim. Vivamus eu sem ullamcorper, vulputate urna vitae, commodo risus. Etiam sagittis eget purus a mattis. Etiam pharetra vel mi ut gravida. Fusce ex ligula, fringilla quis luctus in, fringilla venenatis eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed at metus ut velit finibus luctus. Quisque eget quam ut ante hendrerit faucibus. Vestibulum quis metus finibus, mattis nunc eu, sollicitudin dolor. Donec id venenatis magna, vitae laoreet dui. Phasellus laoreet, arcu laoreet laoreet vestibulum, dolor metus sagittis libero, ac auctor dui purus ut velit. Donec cursus et elit vel pellentesque. Morbi ornare tristique dolor.",
+		"images": "http://placehold.it/350x150"
+		},
+		{ 
+		"title": "placeholder",
+		"dates": "2015",
+		"description": "placeholder",
+		"images": "http://placehold.it/350x150"
 		}
 	]
-}
+};
+
 
 
 
@@ -109,31 +114,83 @@ if(bio.skills.length > 0) {
 }
 
 function displayWork() {
-	
-for (job in work.jobs) {
-	$("#workExperience").append(HTMLworkStart);
-	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-	var formattedEmployerTitle = formattedEmployer + formattedTitle;
-	$(".work-entry:last").append(formattedEmployerTitle);
-	
-	var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-	$(".work-entry:last").append(formattedDates);
-	
-	var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-	$(".work-entry:last").append(formattedDescription);
-}
+
+    for (job in work.jobs) {
+        $("#workExperience").append(HTMLworkStart);
+        var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+        var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+        var formattedEmployerTitle = formattedEmployer + formattedTitle;
+        $(".work-entry:last").append(formattedEmployerTitle);
+
+        var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+        $(".work-entry:last").append(formattedDates);
+
+        var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+        $(".work-entry:last").append(formattedDescription);
+    };
 }
 
 displayWork();
 
+/*
 $(document).click(function(loc) {
 	var x = loc.pageX;
 	var y = loc.pageY;
 	
 	logClicks(x,y);
 });
+*/
+/*
+projects.display = function() {
+	for(project in projects.projects) {
+		$("#projects").append(HTMLprojectStart);
+		
+		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+		$(".project-entry:last").append(formattedTitle);
+		
+		var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+		$(".project-entry:last").append(formattedDates);
+		
+		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+		$(".project-entry:last").append(formattedDescription);
+		
+		if (projects.projects[project].images.length > 0) {
+			for(image in projects.projects[project].images) {
+				var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+				$(".project-entry:last").append(formattedImage);
+			}
+		}
+	}
+}
 
+projects.display();
+*/
+
+projects.display = function() {
+	for(project in projects.projects) {
+		$("#projects").append(HTMLprojectStart);
+
+		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+		$(".project-entry:last").append(formattedTitle);
+		var formattedDate = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+		$(".project-entry:last").append(formattedDate);
+		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+		$(".project-entry:last").append(formattedDescription);
+		var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images);
+		$(".project-entry:last").append(formattedImage);
+
+		if(projects.projects[project].images.length > 0) {
+			for(image in projects.projects[project].images) {
+				var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+				$(".project-entry:last").append(formattedImage);
+			}
+		}	
+	}
+};
+
+projects.display();
+
+$("#map-div").append(googleMap);
 
 
 
