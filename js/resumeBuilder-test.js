@@ -234,4 +234,5 @@ projects.display = function() {
 
 projects.display();
 
+//Google Maps Info
 $("#mapDiv").append(googleMap);
