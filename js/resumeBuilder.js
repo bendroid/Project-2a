@@ -192,7 +192,8 @@ projects.display();
 
 $("#map-div").append(googleMap);
 
-
+//Google Maps Info
+$("#mapDiv").append(googleMap);
 
 /*
 if(work.employer.length > 0) {
